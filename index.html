@@ -97,10 +97,9 @@
   <header>
     <h1>✨ AMR AI Chat</h1>
     <select id="model-select">
-      <option value="claude-4.5-haiku">Claude 4.5 Haiku</option>
-      <option value="claude-3-haiku">Claude 3 Haiku</option>
+      <option value="claude-haiku-4-5">Claude Haiku 4.5</option>
+      <option value="gpt-4o-mini">GPT-4o Mini</option>
       <option value="meta-llama/Llama-3.3-70B-Instruct-Turbo">Llama 3.3 70B</option>
-      <option value="mistralai/Mixtral-8x7B-Instruct-v0.1">Mixtral 8x7B</option>
     </select>
   </header>
 
@@ -112,7 +111,7 @@
   </div>
 
   <script>
-    const WORKER_URL = "https://amr13.doctoramr54.workers.dev/";
+    const WORKER_URL = "https://amr.doctoramr54.workers.dev/";
 
     const chatBox = document.getElementById('chat-box');
     const input = document.getElementById('prompt-input');
@@ -128,6 +127,18 @@
       return msgDiv;
     }
 
+    // جلب الـ Token من المتصفح مباشرة للالتفاف على حجب الخوادم
+    async function fetchToken() {
+      try {
+        const res = await fetch("https://duckduckgo.com/duckchat/v1/status", {
+          headers: { "x-vnc-req": "1" }
+        });
+        return res.headers.get("x-vnc-etag");
+      } catch (e) {
+        return null;
+      }
+    }
+
     async function sendMessage() {
       const prompt = input.value.trim();
       if (!prompt) return;
@@ -137,13 +148,17 @@
 
       const loadingMsg = appendMessage('ai', 'جاري التفكير...');
 
+      // الحصول على الـ Token محلياً
+      const token = await fetchToken();
+
       try {
         const response = await fetch(WORKER_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             prompt: prompt,
-            model: modelSelect.value
+            model: modelSelect.value,
+            token: token
           })
         });
 
