@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>✨ Gemini Duck AI</title>
+  <title>AMR AI Chat</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -27,8 +27,9 @@
       background: #282a2c;
       color: #fff;
       border: 1px solid #3c4043;
-      padding: 6px 12px;
+      padding: 8px 12px;
       border-radius: 8px;
+      outline: none;
     }
     #chat-box {
       flex: 1;
@@ -94,7 +95,7 @@
 <body>
 
   <header>
-    <h1>✨ Gemini Duck AI</h1>
+    <h1>✨ AMR AI Chat</h1>
     <select id="model-select">
       <option value="gpt-4o-mini">GPT-4o Mini</option>
       <option value="claude-3-haiku">Claude 3 Haiku</option>
@@ -111,8 +112,7 @@
   </div>
 
   <script>
-    // ⚠️ ضع رابط الـ Worker الذي قمت بنشره في الخطوة الأولى هنا
-    const WORKER_URL = "https://amr.doctoramr54.workers.dev";
+    const WORKER_URL = "https://amr13.doctoramr54.workers.dev/";
 
     const chatBox = document.getElementById('chat-box');
     const input = document.getElementById('prompt-input');
@@ -168,4 +168,4 @@
     });
   </script>
 </body>
-  </html>
+</html>
