@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>✨ Gemini Duck AI</title>
+  <title>Gemini Duck AI Hub</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background-color: #131314;
       color: #e3e3e3;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
       display: flex;
       flex-direction: column;
       height: 100vh;
@@ -39,10 +39,10 @@
       gap: 16px;
     }
     .message {
-      max-width: 85%;
+      max-width: 80%;
       padding: 12px 16px;
       border-radius: 16px;
-      line-height: 1.6;
+      line-height: 1.5;
       font-size: 15px;
       white-space: pre-wrap;
     }
@@ -94,7 +94,7 @@
 <body>
 
   <header>
-    <h1>✨ Gemini Duck AI</h1>
+    <h1>✨ Duck AI Hub</h1>
     <select id="model-select">
       <option value="gpt-4o-mini">GPT-4o Mini</option>
       <option value="claude-3-haiku">Claude 3 Haiku</option>
@@ -111,9 +111,6 @@
   </div>
 
   <script>
-    // ⚠️ ضع رابط الـ Worker الذي قمت بنشره في الخطوة الأولى هنا
-    const WORKER_URL = "https://amr-13.doctoramr54.workers.dev";
-
     const chatBox = document.getElementById('chat-box');
     const input = document.getElementById('prompt-input');
     const sendBtn = document.getElementById('send-btn');
@@ -138,7 +135,7 @@
       const loadingMsg = appendMessage('ai', 'جاري التفكير...');
 
       try {
-        const response = await fetch(WORKER_URL, {
+        const response = await fetch('/chat.js', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -168,4 +165,4 @@
     });
   </script>
 </body>
-  </html>
+</html>
